@@ -1,6 +1,9 @@
 import React from 'react';
 import './Person.css';
 
+/*
+* JSX to render person block
+*/
 const person = (props) => {
   return (
     <div className="person">
