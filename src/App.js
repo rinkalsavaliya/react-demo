@@ -15,12 +15,12 @@ const app = props => {
       { name: 'Jeet', age: 15, hobby: 'Hobby getting loaded..... ' },
       { name: 'Bhavesh', age: 3, hobby: 'My Hobby is to irritate Rinkal' },
       { name: 'Darshan', age: 40, hobby: 'I like to make people drink salt-water' },
-      { name: 'Vikas', age: 5, hobby: 'My Hobby is to find Math mistakes' },
+      { name: 'Vishal', age: 5, hobby: 'My Hobby is to find Math mistakes' },
       { name: 'Ayush', age: 7, hobby: 'Hobby getting loaded..... ' },
       { name: 'Vineet', age: 65, hobby: 'My Hobby is feka marva' },
       { name: 'Bhoomi', age: 28, hobby: 'Hobby getting loaded..... ' },
       { name: 'Daxesh', age: 26, hobby: 'My Hobby is jugaad karvo' },
-      { name: 'Daxesh-J', age: 21, hobby: 'Hobby getting loaded..... ' },
+      { name: 'Vikas', age: 21, hobby: 'Hobby getting loaded..... ' },
       { name: 'Bhautik', age: 26, hobby: 'Hobby getting loaded..... ' }
     ]
   });
