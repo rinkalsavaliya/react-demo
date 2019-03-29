@@ -12,6 +12,10 @@ const app = props => {
     persons: _.shuffle(personList)
   });
 
+  const [ textState, setTextState] = useState({
+    text: '', count: 0
+  });
+
 
   /*
   * function to shuffle persons
@@ -55,6 +59,14 @@ const app = props => {
   }
 
 
+  const changeTextArea = (event) => {
+    setTextState({
+      text: event.target.value,
+      count: (event.target.value || '').length
+    });
+  }
+
+
   /*
   * return JSX
   */
@@ -62,6 +74,7 @@ const app = props => {
     <div className="App">
       <h1>Hi, I'm a Demo React App, and I show a list of people</h1>
       <p>you can shuffle all people, or you can stick to one person, and shuffle all except him/her.</p>
+      <textarea rows="5" cols="150" onChange={changeTextArea} value={textState.text}></textarea> {textState.count} <br/>
       <button onClick={shufflePersons}>Shuffle All Persons</button>
       <button onClick={restorePersons}>Restore All Persons</button><br/>
       {

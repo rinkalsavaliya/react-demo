@@ -7,6 +7,7 @@ export default [
   { name: 'Darshan', age: 40, hobby: 'I like to make people drink salt-water' },
   { name: 'Vishal', age: 21, hobby: 'I like to find Math mistakes in games' },
   { name: 'Ayush', age: 7, hobby: 'I provide lift to Megha' },
+  { name: 'Ayush', age: 7, hobby: 'I like to make sounds like a child' },
   { name: 'Daxesh', age: 23, hobby: 'I like to do jugaad in everything' },
   { name: 'Kaushal', age: 26, hobby: 'I like to give E-commerce tips' },
   { name: 'Rinkal', age: 23, hobby: 'I like to help other people' },
