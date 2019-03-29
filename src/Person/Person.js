@@ -9,8 +9,11 @@ const person = (props) => {
     <div className="person">
       <h1>{props.name}</h1>
       <p>Your Age : {props.age}</p>
-      <p>{props.children}</p>
-      <button onClick={props.click.bind(this, props.index)}>Shuffle Other Persons</button><br/>
+      <p className={(props.children) ? '' : 'red'}>{props.children || 'Hobby getting loaded..... '}</p>
+      <div className='display-inline-flex'>
+        <button onClick={props.shuffle}>Shuffle Others</button>
+        <button onClick={props.delete}>Delete</button><br/>
+      </div>
     </div>
   )
 };

@@ -1,28 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import _ from 'lodash';
+import personList from './person-list';
 
 /*
 * define state
 */
 const app = props => {
   const [ personState, setPersonsState] = useState({
-    persons: [
-      { name: 'Rinkal', age: 23, hobby: 'My Hobby is to help others' },
-      { name: 'Dinesh', age: 2000, hobby: 'My Hobby is to irritate others' },
-      { name: 'iMehul', age: 50, hobby: 'My Hobby is to bluff about me and Deepi' },
-      { name: 'Alisha', age: 21, hobby: 'Hobby getting loaded..... ' },
-      { name: 'Jeet', age: 15, hobby: 'Hobby getting loaded..... ' },
-      { name: 'Bhavesh', age: 3, hobby: 'My Hobby is to irritate Rinkal' },
-      { name: 'Darshan', age: 40, hobby: 'I like to make people drink salt-water' },
-      { name: 'Vishal', age: 5, hobby: 'My Hobby is to find Math mistakes' },
-      { name: 'Ayush', age: 7, hobby: 'Hobby getting loaded..... ' },
-      { name: 'Vineet', age: 65, hobby: 'My Hobby is feka marva' },
-      { name: 'Bhoomi', age: 28, hobby: 'Hobby getting loaded..... ' },
-      { name: 'Daxesh', age: 26, hobby: 'My Hobby is jugaad karvo' },
-      { name: 'Vikas', age: 21, hobby: 'Hobby getting loaded..... ' },
-      { name: 'Bhautik', age: 26, hobby: 'Hobby getting loaded..... ' }
-    ]
+    persons: _.shuffle(personList)
   });
 
 
@@ -34,6 +21,7 @@ const app = props => {
     // set perosn-state
     setPersonsState({ persons });
   }
+
 
   /*
   * a function to shuffle all people except self
@@ -53,6 +41,20 @@ const app = props => {
     return array;
   }
 
+  const restorePersons = () => {
+    setPersonsState({ persons: JSON.parse(JSON.stringify(personList)) });
+  }
+
+
+  /*
+  * delete the person from the list
+  */
+  const deletePerson = (arrIndex) => {
+    personState.persons.splice(arrIndex, 1);
+    setPersonsState({ persons: personState.persons });
+  }
+
+
   /*
   * return JSX
   */
@@ -60,11 +62,12 @@ const app = props => {
     <div className="App">
       <h1>Hi, I'm a Demo React App, and I show a list of people</h1>
       <p>you can shuffle all people, or you can stick to one person, and shuffle all except him/her.</p>
-      <button onClick={shufflePersons}>Shuffle All Persons</button><br/>
+      <button onClick={shufflePersons}>Shuffle All Persons</button>
+      <button onClick={restorePersons}>Restore All Persons</button><br/>
       {
         personState.persons.map((person, key) => {
           return (
-            <Person key={key} index={key} name={person.name} age={person.age} click={shufflePersons}>
+            <Person key={key} name={person.name} age={person.age} shuffle={() => shufflePersons(key)} delete={() => deletePerson(key)}>
               {person.hobby}
             </Person>
           )
