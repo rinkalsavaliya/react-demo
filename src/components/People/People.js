@@ -99,7 +99,7 @@ class People extends Component {
   * check if the search string matched with given string
   */
   matchString = (base) => {
-    return base.toLowerCase().includes(this.state.search.toLowerCase());
+    return base.toString().toLowerCase().includes(this.state.search.toLowerCase());
   }
 
 
@@ -114,7 +114,7 @@ class People extends Component {
       {
         this.state.personState.persons.map((person, index) => (
             // render only if search string matches with either name or hobby
-            (this.matchString(person.name) || this.matchString(person.hobby)) && (
+            (this.matchString(person.name) || this.matchString(person.hobby) || this.matchString(person.age)) && (
               <Person key={`${person.id}-${person.name}`} id={`${person.id}-${person.name}`} name={person.name} age={person.age} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
                 {person.hobby}
               </Person>
