@@ -1,5 +1,5 @@
 import React from 'react';
-import './Person.css';
+import personClasses from './Person.module.css';
 import Radium from 'radium';
 /*
 * JSX to render person block
@@ -16,13 +16,13 @@ const person = (props) => {
     }
   };
   return (
-    <div className='person' key={props.id} style={personStyle}>
+    <div className={personClasses.person} key={props.id} style={personStyle}>
       <h1>{props.name}</h1>
       <p>Your Age : {props.age}</p>
-      <p className={(props.children) ? '' : 'red'}>{props.children || 'Hobby getting loaded..... '}</p>
-      <div className='display-inline-flex'>
-        <button onClick={props.shuffle}>Shuffle Others</button>
-        <button style={btnStyle} onClick={props.delete}>Delete</button><br/>
+      <p className={(props.children) ? '' : personClasses.red}>{props.children || 'Hobby getting loaded..... '}</p>
+      <div className={personClasses['display-inline-flex']}>
+        <button className={personClasses.btn} onClick={props.shuffle}>Shuffle Others</button>
+        <button className={personClasses.btn} style={btnStyle} onClick={props.delete}>Delete</button><br/>
       </div>
     </div>
   )

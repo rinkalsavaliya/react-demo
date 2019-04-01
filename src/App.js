@@ -120,8 +120,8 @@ class App extends Component {
             })
           }
           <br/>
-          <button onClick={this.shufflePersons}>Shuffle All Persons</button>
-          <button onClick={this.restorePersons}>Restore All Persons</button><br/>
+          <button className='btn' onClick={this.shufflePersons}>Shuffle All Persons</button>
+          <button className='btn' onClick={this.restorePersons}>Restore All Persons</button><br/>
           {
             this.state.personState.persons.map((person, index) => {
               return (

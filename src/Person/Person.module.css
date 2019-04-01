@@ -15,7 +15,7 @@
   display: inline-flex;
 }
 
-button {
+.btn {
   cursor: pointer;
   font-size: 14px;
   display: inline-block;
@@ -36,12 +36,6 @@ button {
   border-radius: 4px;
 }
 
-button:hover {
+.btn:hover {
   background-color: #000000 !important;
 }
-
-/* @media (max-width: 512px) {
-  .person {
-    width: 450px !important;
-  }
-} */
