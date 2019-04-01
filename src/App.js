@@ -48,7 +48,11 @@ class App extends Component {
   * restore all the persons from the actual list
   */
   restorePersons = () => {
-    this.setState({ personState: { persons: JSON.parse(JSON.stringify(personList)) } });
+    this.setState({
+      personState: {
+        persons: JSON.parse(JSON.stringify(personList))
+      }
+    });
   }
 
 
@@ -57,7 +61,11 @@ class App extends Component {
   */
   deletePerson = (arrIndex) => {
     this.state.personState.persons.splice(arrIndex, 1);
-    this.setState({ personState: { persons: this.state.personState.persons } });
+    this.setState({
+      personState: {
+        persons: this.state.personState.persons
+      }
+    });
   }
 
   /*
@@ -65,7 +73,11 @@ class App extends Component {
   */
   changeText = (event) => {
     this.setState({
-      textState: { text: event.target.value, count: (event.target.value || '').length, minText: this.state.textState.minText }
+      textState: {
+        ...this.state.textState,
+        text: event.target.value,
+        count: (event.target.value || '').length
+      }
     });
   }
 
@@ -75,7 +87,13 @@ class App extends Component {
   deleteChar = (index) => {
     let text = this.state.textState.text.split('');
     text.splice(index, 1);
-    this.setState({ textState: { text: text.join(''), count: text.length, minText: this.state.textState.minText } });
+    this.setState({
+      textState: {
+        ...this.state.textState,
+        text: text.join(''),
+        count: text.length
+      }
+    });
   }
 
 
@@ -87,7 +105,7 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a Demo React App, and I show a list of people</h1>
         <p>you can shuffle all people, or you can stick to one person, and shuffle all except him/her.</p>
-        <textarea rows="5" cols="150" onChange={this.changeText} value={this.state.textState.text}></textarea><br/>
+        <input className='text' onChange={this.changeText} value={this.state.textState.text}/>
         <Text count={this.state.textState.count} min={this.state.textState.minText}/>
         {
           this.state.textState.text.split('').map((char, key) => {
