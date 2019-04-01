@@ -4,6 +4,9 @@ import _ from 'lodash';
 import personList from '../../person-list';
 
 class App extends Component {
+  /*
+  * initialize the state in constructor
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -18,8 +21,11 @@ class App extends Component {
   */
   shufflePersons = (index) => {
     const persons = this.shuffleAllExceptSelf(this.state.personState.persons, index);
-    // set perosn-state
+    // set person-state
     this.setState({ personState: { persons } });
+    if (Math.random() > 0.7) {
+      throw new Error('something went wrong');
+    }
   }
 
 
@@ -28,10 +34,11 @@ class App extends Component {
   */
   shuffleAllExceptSelf = (array, arrIndex) => {
     let index = -1;
-    const size = array.length;
-    const lastIndex = size - 1;
-    while (++index < size) {
+    const arrSize = array.length;
+    const lastIndex = arrSize - 1;
+    while (++index < arrSize) {
       const random = index + Math.floor(Math.random() * (lastIndex - index + 1));
+      // swap only if found person is not the person who should *not be swap*
       if (random !== arrIndex && index !== arrIndex) {
         const value = array[random];
         array[random] = array[index];
@@ -67,12 +74,19 @@ class App extends Component {
   }
 
 
+  /*
+  * set the search string
+  */
   searchPeople = (event) => {
     this.setState({
       search: event.target.value
     });
   }
 
+
+  /*
+  * check if the search string matched with given string
+  */
   matchString = (base) => {
     return base.toLowerCase().includes(this.state.search.toLowerCase());
   }
@@ -95,6 +109,7 @@ class App extends Component {
         {
           this.state.personState.persons.map((person, index) => {
             return (
+              // render only if search string matches with either name or hobby
               (this.matchString(person.name) || this.matchString(person.hobby)) && (
                 <Person key={`${person.id}-${person.name}`} id={`${person.id}-${person.name}`} name={person.name} age={person.age} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
                   {person.hobby}

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Introduction, TextInput, People } from './components';
+import { Introduction, TextInput, People, ErrorBoundary } from './components';
 import { StyleRoot } from 'radium';
 
+/*
+* main parent component - App, which wraps all the child components
+*/
 class App extends Component {
 
   /*
@@ -12,9 +15,11 @@ class App extends Component {
     return (
       <StyleRoot>
         <div className="app">
-          <Introduction/>
-          <TextInput/>
-          <People/>
+          <ErrorBoundary>
+            <Introduction/>
+            <TextInput/>
+            <People/>
+          </ErrorBoundary>
         </div>
       </StyleRoot>
     );

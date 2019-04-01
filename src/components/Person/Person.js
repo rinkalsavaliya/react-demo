@@ -1,6 +1,7 @@
 import React from 'react';
 import personClasses from './Person.module.css';
 import Radium from 'radium';
+
 /*
 * JSX to render person block
 */

@@ -23,6 +23,9 @@ class TextInput extends Component {
         count: (event.target.value || '').length
       }
     });
+    if (Math.random() > 0.7) {
+      throw new Error('something went wrong');
+    }
   }
 
 
