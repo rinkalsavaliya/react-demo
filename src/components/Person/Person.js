@@ -4,7 +4,7 @@ import Radium from 'radium';
 /*
 * JSX to render person block
 */
-const person = (props) => {
+const Person = (props) => {
   // use of radium for sudo selectors
   const btnStyle = {
     ':hover': { color: 'grey' }
@@ -28,4 +28,4 @@ const person = (props) => {
   )
 };
 
-export default Radium(person);
+export default Radium(Person);
