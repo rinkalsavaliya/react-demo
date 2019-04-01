@@ -5,6 +5,7 @@ import Char from './Char/Char';
 import Text from './Validation/Text';
 import _ from 'lodash';
 import personList from './person-list';
+import { StyleRoot } from 'radium';
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends Component {
       textState: { text: '', count: 0, minText: 5 }
     }
   }
+
 
   /*
   * function to shuffle persons
@@ -68,6 +70,7 @@ class App extends Component {
     });
   }
 
+
   /*
   * change event for the text
   */
@@ -80,6 +83,7 @@ class App extends Component {
       }
     });
   }
+
 
   /*
   * delete character from the text
@@ -102,31 +106,33 @@ class App extends Component {
   */
   render = () => {
     return (
-      <div className="App">
-        <h1>Hi, I'm a Demo React App, and I show a list of people</h1>
-        <p>you can shuffle all people, or you can stick to one person, and shuffle all except him/her.</p>
-        <input className='text' onChange={this.changeText} value={this.state.textState.text}/>
-        <Text count={this.state.textState.count} min={this.state.textState.minText}/>
-        {
-          this.state.textState.text.split('').map((char, key) => {
-            return (
-              <Char key={key} deleteChar={() => this.deleteChar(key)} char={char}/>
-            )
-          })
-        }
-        <br/>
-        <button onClick={this.shufflePersons}>Shuffle All Persons</button>
-        <button onClick={this.restorePersons}>Restore All Persons</button><br/>
-        {
-          this.state.personState.persons.map((person, key) => {
-            return (
-              <Person key={person.id} name={person.name} age={person.age} shuffle={() => this.shufflePersons(key)} delete={() => this.deletePerson(key)}>
-                {person.hobby}
-              </Person>
-            )
-          })
-        }
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm a Demo React App, and I show a list of people</h1>
+          <p>you can shuffle all people, or you can stick to one person, and shuffle all except him/her.</p>
+          <input className='text' onChange={this.changeText} value={this.state.textState.text}/>
+          <Text count={this.state.textState.count} min={this.state.textState.minText}/>
+          {
+            this.state.textState.text.split('').map((char, key) => {
+              return (
+                <Char key={key} deleteChar={() => this.deleteChar(key)} char={char}/>
+              )
+            })
+          }
+          <br/>
+          <button onClick={this.shufflePersons}>Shuffle All Persons</button>
+          <button onClick={this.restorePersons}>Restore All Persons</button><br/>
+          {
+            this.state.personState.persons.map((person, index) => {
+              return (
+                <Person key={`${person.id}-${person.name}`} id={`${person.id}-${person.name}`} name={person.name} age={person.age} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
+                  {person.hobby}
+                </Person>
+              )
+            })
+          }
+        </div>
+      </StyleRoot>
     );
   }
 }

@@ -39,3 +39,9 @@ button {
 button:hover {
   background-color: #000000 !important;
 }
+
+/* @media (max-width: 512px) {
+  .person {
+    width: 450px !important;
+  }
+} */
