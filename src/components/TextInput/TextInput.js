@@ -16,15 +16,16 @@ class TextInput extends Component {
   * change event for the text
   */
   changeText = (event) => {
-    this.setState({
-      textState: {
-        ...this.state.textState,
-        text: event.target.value,
-        count: (event.target.value || '').length
-      }
-    });
     if (Math.random() > 0.9) {
       throw new Error('something went wrong');
+    } else {
+      this.setState({
+        textState: {
+          ...this.state.textState,
+          text: event.target.value,
+          count: (event.target.value || '').length
+        }
+      });
     }
   }
 
