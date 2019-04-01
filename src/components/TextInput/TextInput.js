@@ -6,8 +6,8 @@ class TextInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      textState: { text: '', count: 0, minText: 5 }
-    }
+      textState: { ...props.textState, text: '', count: 0,  }
+    };
   }
 
 

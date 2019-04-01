@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Person } from './components';
-import personList from '../../person-list';
 
 class People extends Component {
   /*
@@ -9,7 +8,8 @@ class People extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      personState: { persons: [...personList] },
+      personState: { persons: props.personList },
+      actualPersonList: [...props.personList],
       search: ''
     }
   }
@@ -46,9 +46,9 @@ class People extends Component {
       const random = index + Math.floor(Math.random() * (lastIndex - index + 1));
       // swap only if found person is not the person who should *not be swap*
       if (random !== arrIndex && index !== arrIndex) {
-        const value = array[random];
-        array[random] = array[index];
-        array[index] = value;
+        const value = {...array[random]};
+        array[random] = {...array[index]};
+        array[index] = {...value};
       }
     }
     return array;
@@ -61,7 +61,7 @@ class People extends Component {
   restorePersons = () => {
     this.setState({
       personState: {
-        persons: [...personList]
+        persons: [...this.state.actualPersonList]
       }
     });
   }
