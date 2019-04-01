@@ -8,11 +8,16 @@ class People extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      personState: { persons: props.personList },
-      actualPersonList: [...props.personList],
+      personState: { persons: [...props.personList] },
       search: ''
     }
   }
+
+  // method to change state when props change
+  // static getDerivedStateFromProps = (props, state) => {
+  //   console.log(props, state, );
+  //   return state;
+  // }
 
   /*
   * shuffle all people when component gets mounted completely
@@ -61,7 +66,7 @@ class People extends Component {
   restorePersons = () => {
     this.setState({
       personState: {
-        persons: [...this.state.actualPersonList]
+        persons: [...this.props.personList]
       }
     });
   }
