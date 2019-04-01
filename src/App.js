@@ -1,36 +1,34 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Char from './Char/Char';
+import Text from './Validation/Text';
 import _ from 'lodash';
 import personList from './person-list';
 
-/*
-* define state
-*/
-const app = props => {
-  const [ personState, setPersonsState] = useState({
-    persons: _.shuffle(personList)
-  });
-
-  const [ textState, setTextState] = useState({
-    text: '', count: 0
-  });
-
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      personState: { persons: _.shuffle(personList) },
+      textState: { text: '', count: 0, minText: 5 }
+    }
+  }
 
   /*
   * function to shuffle persons
   */
-  const shufflePersons = (index) => {
-    const persons = shuffleAllExceptSelf(personState.persons, index);
+  shufflePersons = (index) => {
+    const persons = this.shuffleAllExceptSelf(this.state.personState.persons, index);
     // set perosn-state
-    setPersonsState({ persons });
+    this.setState({ personState: { persons } });
   }
 
 
   /*
   * a function to shuffle all people except self
   */
-  const shuffleAllExceptSelf = (array, arrIndex) => {
+  shuffleAllExceptSelf = (array, arrIndex) => {
     let index = -1;
     const size = array.length;
     const lastIndex = size - 1;
@@ -45,51 +43,74 @@ const app = props => {
     return array;
   }
 
-  const restorePersons = () => {
-    setPersonsState({ persons: JSON.parse(JSON.stringify(personList)) });
+
+  /*
+  * restore all the persons from the actual list
+  */
+  restorePersons = () => {
+    this.setState({ personState: { persons: JSON.parse(JSON.stringify(personList)) } });
   }
 
 
   /*
   * delete the person from the list
   */
-  const deletePerson = (arrIndex) => {
-    personState.persons.splice(arrIndex, 1);
-    setPersonsState({ persons: personState.persons });
+  deletePerson = (arrIndex) => {
+    this.state.personState.persons.splice(arrIndex, 1);
+    this.setState({ personState: { persons: this.state.personState.persons } });
   }
 
-
-  const changeTextArea = (event) => {
-    setTextState({
-      text: event.target.value,
-      count: (event.target.value || '').length
+  /*
+  * change event for the text
+  */
+  changeText = (event) => {
+    this.setState({
+      textState: { text: event.target.value, count: (event.target.value || '').length, minText: this.state.textState.minText }
     });
+  }
+
+  /*
+  * delete character from the text
+  */
+  deleteChar = (index) => {
+    let text = this.state.textState.text.split('');
+    text.splice(index, 1);
+    this.setState({ textState: { text: text.join(''), count: text.length, minText: this.state.textState.minText } });
   }
 
 
   /*
-  * return JSX
+  * call render method
   */
-  return (
-    <div className="App">
-      <h1>Hi, I'm a Demo React App, and I show a list of people</h1>
-      <p>you can shuffle all people, or you can stick to one person, and shuffle all except him/her.</p>
-      <textarea rows="5" cols="150" onChange={changeTextArea} value={textState.text}></textarea> {textState.count} <br/>
-      <button onClick={shufflePersons}>Shuffle All Persons</button>
-      <button onClick={restorePersons}>Restore All Persons</button><br/>
-      {
-        personState.persons.map((person, key) => {
-          return (
-            <Person key={key} name={person.name} age={person.age} shuffle={() => shufflePersons(key)} delete={() => deletePerson(key)}>
-              {person.hobby}
-            </Person>
-          )
-        })
-      }
-    </div>
-  );
-  // not a very good way of creating element
-  // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'Does this work now?'))
+  render = () => {
+    return (
+      <div className="App">
+        <h1>Hi, I'm a Demo React App, and I show a list of people</h1>
+        <p>you can shuffle all people, or you can stick to one person, and shuffle all except him/her.</p>
+        <textarea rows="5" cols="150" onChange={this.changeText} value={this.state.textState.text}></textarea><br/>
+        <Text count={this.state.textState.count} min={this.state.textState.minText}/>
+        {
+          this.state.textState.text.split('').map((char, key) => {
+            return (
+              <Char key={key} deleteChar={() => this.deleteChar(key)} char={char}/>
+            )
+          })
+        }
+        <br/>
+        <button onClick={this.shufflePersons}>Shuffle All Persons</button>
+        <button onClick={this.restorePersons}>Restore All Persons</button><br/>
+        {
+          this.state.personState.persons.map((person, key) => {
+            return (
+              <Person key={person.id} name={person.name} age={person.age} shuffle={() => this.shufflePersons(key)} delete={() => this.deletePerson(key)}>
+                {person.hobby}
+              </Person>
+            )
+          })
+        }
+      </div>
+    );
+  }
 }
 
-export default app;
+export default App;

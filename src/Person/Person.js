@@ -6,7 +6,7 @@ import './Person.css';
 */
 const person = (props) => {
   return (
-    <div className="person">
+    <div className='person'>
       <h1>{props.name}</h1>
       <p>Your Age : {props.age}</p>
       <p className={(props.children) ? '' : 'red'}>{props.children || 'Hobby getting loaded..... '}</p>
