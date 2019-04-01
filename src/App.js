@@ -11,7 +11,7 @@ class App extends Component {
   render = () => {
     return (
       <StyleRoot>
-        <div className="App">
+        <div className="app">
           <Introduction/>
           <TextInput/>
           <People/>

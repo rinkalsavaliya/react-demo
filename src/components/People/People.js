@@ -7,7 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      personState: { persons: _.shuffle(personList) }
+      personState: { persons: _.shuffle(personList) },
+      search: ''
     }
   }
 
@@ -66,20 +67,39 @@ class App extends Component {
   }
 
 
+  searchPeople = (event) => {
+    this.setState({
+      search: event.target.value
+    });
+  }
+
+  matchString = (base) => {
+    return base.toLowerCase().includes(this.state.search.toLowerCase());
+  }
+
+
   /*
   * call render method
   */
   render = () => {
+    const searchStyle = {
+      float: 'right',
+      marginRight: '15px',
+      width: '250px'
+    };
     return (
       <div className='display-block'>
         <button className='btn' onClick={this.shufflePersons}>Shuffle All Persons</button>
         <button className='btn' onClick={this.restorePersons}>Restore All Persons</button><br/>
+        <input onChange={this.searchPeople} value={this.state.search} placeholder='search people' style={searchStyle}/><br/>
         {
           this.state.personState.persons.map((person, index) => {
             return (
-              <Person key={`${person.id}-${person.name}`} id={`${person.id}-${person.name}`} name={person.name} age={person.age} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
-                {person.hobby}
-              </Person>
+              (this.matchString(person.name) || this.matchString(person.hobby)) && (
+                <Person key={`${person.id}-${person.name}`} id={`${person.id}-${person.name}`} name={person.name} age={person.age} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
+                  {person.hobby}
+                </Person>
+              )
             )
           })
         }

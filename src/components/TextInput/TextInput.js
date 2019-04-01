@@ -48,7 +48,7 @@ class TextInput extends Component {
   render = () => {
     return (
       <div className='display-block'>
-        <input className='text' onChange={this.changeText} value={this.state.textState.text}/>
+        <input placeholder='type anything' className='text' onChange={this.changeText} value={this.state.textState.text}/>
         <Text count={this.state.textState.count} min={this.state.textState.minText}/>
         {
           this.state.textState.text.split('').map((char, key) => {
