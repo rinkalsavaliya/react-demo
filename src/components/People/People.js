@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import Person from '../Person/Person';
-import _ from 'lodash';
+import { Person } from './components';
 import personList from '../../person-list';
 
-class App extends Component {
+class People extends Component {
   /*
   * initialize the state in constructor
   */
   constructor(props) {
     super(props);
     this.state = {
-      personState: { persons: _.shuffle(personList) },
+      personState: { persons: [...personList] },
       search: ''
     }
+  }
+
+  /*
+  * shuffle all people when component gets mounted completely
+  */
+  componentDidMount = () => {
+    this.shufflePersons();
   }
 
 
@@ -23,7 +29,7 @@ class App extends Component {
     const persons = this.shuffleAllExceptSelf(this.state.personState.persons, index);
     // set person-state
     this.setState({ personState: { persons } });
-    if (Math.random() > 0.7) {
+    if (Math.random() > 0.9) {
       throw new Error('something went wrong');
     }
   }
@@ -55,7 +61,7 @@ class App extends Component {
   restorePersons = () => {
     this.setState({
       personState: {
-        persons: JSON.parse(JSON.stringify(personList))
+        persons: [...personList]
       }
     });
   }
@@ -95,32 +101,24 @@ class App extends Component {
   /*
   * call render method
   */
-  render = () => {
-    const searchStyle = {
-      float: 'right',
-      marginRight: '15px',
-      width: '250px'
-    };
-    return (
-      <div className='display-block'>
-        <button className='btn' onClick={this.shufflePersons}>Shuffle All Persons</button>
-        <button className='btn' onClick={this.restorePersons}>Restore All Persons</button><br/>
-        <input onChange={this.searchPeople} value={this.state.search} placeholder='search people' style={searchStyle}/><br/>
-        {
-          this.state.personState.persons.map((person, index) => {
-            return (
-              // render only if search string matches with either name or hobby
-              (this.matchString(person.name) || this.matchString(person.hobby)) && (
-                <Person key={`${person.id}-${person.name}`} id={`${person.id}-${person.name}`} name={person.name} age={person.age} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
-                  {person.hobby}
-                </Person>
-              )
+  render = () => (
+    <div className='display-block'>
+      <button className='btn' onClick={this.shufflePersons}>Shuffle All Persons</button>
+      <button className='btn' onClick={this.restorePersons}>Restore All Persons</button><br/>
+      <input onChange={this.searchPeople} value={this.state.search} placeholder='search people' style={{float: 'right',marginRight: '15px',width: '250px'}}/><br/>
+      {
+        this.state.personState.persons.map((person, index) => (
+            // render only if search string matches with either name or hobby
+            (this.matchString(person.name) || this.matchString(person.hobby)) && (
+              <Person key={`${person.id}-${person.name}`} id={`${person.id}-${person.name}`} name={person.name} age={person.age} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
+                {person.hobby}
+              </Person>
             )
-          })
-        }
-      </div>
-    );
-  }
+          )
+        )
+      }
+    </div>
+  );
 }
 
-export default App;
+export default People;

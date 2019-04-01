@@ -23,7 +23,7 @@ class TextInput extends Component {
         count: (event.target.value || '').length
       }
     });
-    if (Math.random() > 0.7) {
+    if (Math.random() > 0.9) {
       throw new Error('something went wrong');
     }
   }
@@ -48,21 +48,19 @@ class TextInput extends Component {
   /*
   * call render method
   */
-  render = () => {
-    return (
-      <div className='display-block'>
-        <input placeholder='type anything' className='text' onChange={this.changeText} value={this.state.textState.text}/>
-        <Text count={this.state.textState.count} min={this.state.textState.minText}/>
-        {
-          this.state.textState.text.split('').map((char, key) => {
-            return (
-              <Char key={key} deleteChar={() => this.deleteChar(key)} char={char}/>
-            )
-          })
-        }
-      </div>
-    );
-  }
+  render = () => (
+    <div className='display-block'>
+      <input placeholder='type anything' className='text' onChange={this.changeText} value={this.state.textState.text}/>
+      <Text count={this.state.textState.count} min={this.state.textState.minText}/>
+      {
+        this.state.textState.text.split('').map((char, key) => {
+          return (
+            <Char key={key} deleteChar={() => this.deleteChar(key)} char={char}/>
+          )
+        })
+      }
+    </div>
+  );
 }
 
 export default TextInput;
