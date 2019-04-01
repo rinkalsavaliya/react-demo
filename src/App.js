@@ -28,7 +28,11 @@ class App extends Component {
         <div className="app">
           <ErrorBoundary>
             <Introduction/>
+          </ErrorBoundary>
+          <ErrorBoundary>
             <TextInput textState={this.state.textState}/>
+            </ErrorBoundary>
+          <ErrorBoundary>
             <People personList={this.state.personList}/>
           </ErrorBoundary>
         </div>

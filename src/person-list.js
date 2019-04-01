@@ -1,5 +1,5 @@
 export default [
-  { id: 1, name: 'Dinesh', age: 2000, hobby: 'I like to irritate other people' },
+  { id: 1, name: 'Dinesh', age: 2000, hobby: 'I just love to irritate rinkal' },
   { id: 2, name: 'Vineet', age: 65, hobby: 'My Hobby is feka marva' },
   { id: 3, name: 'iMehul', age: 50, hobby: 'I like to bluff about me and Deepi' },
   { id: 4, name: 'Jeet', age: 15, hobby: 'I like to follow iMehul-Patel' },
