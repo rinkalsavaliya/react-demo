@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
-import Char from './Char/Char';
+import { Person, Char, Introduction } from './components';
 import Text from './Validation/Text';
 import _ from 'lodash';
 import personList from './person-list';
@@ -108,8 +107,7 @@ class App extends Component {
     return (
       <StyleRoot>
         <div className="App">
-          <h1>Hi, I'm a Demo React App, and I show a list of people</h1>
-          <p>you can shuffle all people, or you can stick to one person, and shuffle all except him/her.</p>
+          <Introduction/>
           <input className='text' onChange={this.changeText} value={this.state.textState.text}/>
           <Text count={this.state.textState.count} min={this.state.textState.minText}/>
           {
