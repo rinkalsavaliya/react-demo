@@ -28,7 +28,7 @@ class People extends Component {
   shufflePersons = (index) => {
     const persons = this.shuffleAllExceptSelf(this.state.personState.persons, index);
     console.log('outside');
-    if (Math.random() > 0.5) {
+    if (Math.random() > 0.7) {
       console.log('if');
       throw new Error('something went wrong');
     } else {
