@@ -1,6 +1,8 @@
 import React from 'react';
 import personClasses from './Person.module.css';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
+
 /*
 * JSX to render person block
 */
@@ -22,7 +24,7 @@ class Person extends React.Component {
       <div id={this.props.person.id} className={personClasses.person} style={personStyle}>
         <h1>{this.props.person.name}</h1>
         <p>Your Age : {this.props.person.age}</p>
-        <p className={(this.props.person.children) ? personClasses.green : personClasses.red}>{this.props.person.children || 'Hobby getting loaded..... '}</p>
+        <p className={(this.props.children) ? personClasses.green : personClasses.red}>{this.props.children || 'Hobby getting loaded..... '}</p>
         <div className={personClasses['display-inline-flex']}>
           <button className={personClasses.btn} onClick={this.props.shuffle}>Shuffle Others</button>
           <button className={personClasses.btn + ' ' + personClasses['dlt-btn']} onClick={this.props.delete}>Delete</button><br/>
@@ -30,6 +32,16 @@ class Person extends React.Component {
       </div>
     )
   }
+};
+
+Person.propTypes = {
+  shuffle: PropTypes.func,
+  delete: PropTypes.func,
+  person: PropTypes.shape({
+    name: PropTypes.string,
+    age: PropTypes.number,
+    children: PropTypes.string,
+  })
 };
 
 export default Radium(Person);
