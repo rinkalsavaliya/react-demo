@@ -18,7 +18,7 @@ class Person extends React.Component {
   // }
   render() {
     // this use of radium styled hover makes the life cycle run again
-    // if you comment the hover part (line-23), you won't get **getDerivedStateFromProps** called
+    // if you comment the hover part (line-27), you won't get **getDerivedStateFromProps** called
     // this hover doesn't affect in parent component
     // i.e., by using this hover, parent does not change either state or props
     // so it should not re-render the component
