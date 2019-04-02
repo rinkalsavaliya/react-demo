@@ -13,11 +13,6 @@ class People extends Component {
     }
   }
 
-  // method to change state when props change
-  // static getDerivedStateFromProps = (props, state) => {
-  //   console.log(props, state, );
-  //   return state;
-  // }
 
   /*
   * shuffle all people when component gets mounted completely
