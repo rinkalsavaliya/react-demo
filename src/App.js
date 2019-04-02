@@ -26,15 +26,17 @@ class App extends Component {
     return (
       <StyleRoot>
         <div className="app">
-          <ErrorBoundary>
-            <Introduction/>
-          </ErrorBoundary>
+
+          <Introduction/>
+
           <ErrorBoundary>
             <TextInput textState={this.state.textState}/>
-            </ErrorBoundary>
+          </ErrorBoundary>
+
           <ErrorBoundary>
             <People personList={this.state.personList}/>
           </ErrorBoundary>
+
         </div>
       </StyleRoot>
     );

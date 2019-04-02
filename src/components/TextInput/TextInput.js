@@ -16,7 +16,7 @@ class TextInput extends Component {
   * change event for the text
   */
   changeText = (event) => {
-    if (Math.random() > 0.9) {
+    if (Math.random() > 0.5) {
       throw new Error('something went wrong');
     } else {
       this.setState({
