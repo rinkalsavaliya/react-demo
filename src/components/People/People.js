@@ -18,7 +18,7 @@ class People extends Component {
   * shuffle all people when component gets mounted completely
   */
   componentDidMount = () => {
-    // this.shufflePersons();
+    this.shufflePersons();
   }
 
 
@@ -27,12 +27,9 @@ class People extends Component {
   */
   shufflePersons = (index) => {
     const persons = this.shuffleAllExceptSelf([...this.state.personState.persons], index);
-    console.log('outside');
     if (Math.random() > 1) {
-      console.log('if');
       throw new Error('something went wrong');
     } else {
-      console.log('else');
       // set person-state
       this.setState({ personState: { persons } });
     }
