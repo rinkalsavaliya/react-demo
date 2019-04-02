@@ -6,6 +6,9 @@
   display: inline-block;
   margin: 10px;
 }
+/* .person:hover {
+  background-color: tan;
+} */
 
 @media (max-width: 512px) {
   .person {
@@ -23,6 +26,9 @@
 
 .red {
   color: red;
+}
+.green {
+  color: green;
 }
 
 .display-inline-flex {

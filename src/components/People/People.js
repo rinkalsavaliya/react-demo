@@ -18,7 +18,7 @@ class People extends Component {
   * shuffle all people when component gets mounted completely
   */
   componentDidMount = () => {
-    this.shufflePersons();
+    // this.shufflePersons();
   }
 
 
@@ -26,9 +26,9 @@ class People extends Component {
   * function to shuffle persons
   */
   shufflePersons = (index) => {
-    const persons = this.shuffleAllExceptSelf(this.state.personState.persons, index);
+    const persons = this.shuffleAllExceptSelf([...this.state.personState.persons], index);
     console.log('outside');
-    if (Math.random() > 0.7) {
+    if (Math.random() > 1) {
       console.log('if');
       throw new Error('something went wrong');
     } else {
@@ -77,9 +77,7 @@ class People extends Component {
   deletePerson = (arrIndex) => {
     this.state.personState.persons.splice(arrIndex, 1);
     this.setState({
-      personState: {
-        persons: this.state.personState.persons
-      }
+      personState: this.state.personState
     });
   }
 
@@ -97,8 +95,8 @@ class People extends Component {
   /*
   * check if the search string matched with given string
   */
-  matchString = (base) => {
-    return base.toString().toLowerCase().includes(this.state.search.toLowerCase());
+  matchString = (str) => {
+    return str.toString().toLowerCase().includes(this.state.search.toLowerCase());
   }
 
 
@@ -114,7 +112,7 @@ class People extends Component {
         this.state.personState.persons.map((person, index) => (
             // render only if search string matches with either name or hobby
             (this.matchString(person.name) || this.matchString(person.hobby) || this.matchString(person.age)) && (
-              <Person key={`${person.id}-${person.name}`} id={`${person.id}-${person.name}`} name={person.name} age={person.age} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
+              <Person key={person.id} person={person} shuffle={() => this.shufflePersons(index)} delete={() => this.deletePerson(index)}>
                 {person.hobby}
               </Person>
             )
