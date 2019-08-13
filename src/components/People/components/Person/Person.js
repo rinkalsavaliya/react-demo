@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 class Person extends React.Component {
   render() {
     // this use of radium styled hover makes the life cycle run again
-    // if you comment the hover part (line-27), you won't get **getDerivedStateFromProps** called
+    // if you comment the hover part (line-22), you won't get **getDerivedStateFromProps** called
     // this hover doesn't affect in parent component
     // i.e., by using this hover, parent does not change either state or props
     // so it should not re-render the component
@@ -17,11 +17,16 @@ class Person extends React.Component {
 
     // because react updates virtual dom when radium is used, so it calls all life cycle methods
     // and actual DOM updates itself when radium is not used
-    const personStyle = {
-      ':hover': { backgroundColor: 'tan' }
-    };
+    const styles = {
+      personStyle: {
+        ':hover': { backgroundColor: 'tan' }
+      },
+      btnStyle: {
+        ':hover': { color: 'red' }
+      }
+    }
     return (
-      <div id={this.props.person.id} className={personClasses.person} style={personStyle}>
+      <div id={this.props.person.id} className={personClasses.person} style={styles.personStyle}>
         <h1>{this.props.person.name}</h1>
         <p>Your Age : {this.props.person.age}</p>
         <p className={(this.props.children) ? personClasses.green : personClasses.red}>{this.props.children || 'Hobby getting loaded..... '}</p>
